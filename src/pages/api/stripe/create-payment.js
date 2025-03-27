@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Define a Mongoose schema for storing payment details
 const PaymentSchema = new mongoose.Schema({
   paymentIntentId: String,
   amount: Number,
@@ -12,10 +11,8 @@ const PaymentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-// Create a Mongoose model
 const Payment = mongoose.models.Payment || mongoose.model("Payment", PaymentSchema);
 
-// Connect to MongoDB
 async function connectToDatabase() {
   if (mongoose.connection.readyState === 0) {
     await mongoose.connect(process.env.MONGODB_URI, {
@@ -37,16 +34,13 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
 
-    // Create a payment intent with Stripe
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Convert to smallest currency unit
+      amount: Math.round(amount * 100),
       currency,
     });
 
-    // Connect to the database
     await connectToDatabase();
 
-    // Store payment details in the database
     const payment = new Payment({
       paymentIntentId: paymentIntent.id,
       amount,

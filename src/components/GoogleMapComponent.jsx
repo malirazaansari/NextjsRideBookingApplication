@@ -6,7 +6,6 @@ const defaultCenter = {
   lng: -0.118092,
 };
 
-// Dark mode style
 const darkModeStyle = [
   { "elementType": "geometry", "stylers": [{ "color": "#212121" }] },
   { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
@@ -74,7 +73,7 @@ const GoogleMapComponent = ({ isVisible, pickupPlace, dropoffPlace, viaPlaces, i
   }, [isLoaded, pickupPlace, dropoffPlace, viaPlaces, isWaitAndReturn]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>; // Show a loading state until the API is loaded
+    return <div>Loading...</div>;
   }
 
   return (

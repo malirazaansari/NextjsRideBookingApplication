@@ -52,7 +52,7 @@ const TripDetailsForm = ({ pickupPlace, onPlaceSelected, addViaPlace, isWaitAndR
 
   useEffect(() => {
     const selectedDateTime = `${selectedDate} ${selectedHour.toString().padStart(2, "0")}:${selectedMinute.toString().padStart(2, "0")}`;
-    onDateTimeChange(selectedDateTime); // Notify parent about the selected date and time
+    onDateTimeChange(selectedDateTime);
   }, [selectedDate, selectedHour, selectedMinute, onDateTimeChange]);
 
   const handleInputChange = (field, value) => {
@@ -81,7 +81,7 @@ const TripDetailsForm = ({ pickupPlace, onPlaceSelected, addViaPlace, isWaitAndR
         addViaPlace={addViaPlace}
         isWaitAndReturn={isWaitAndReturn}
         pickupPlace={pickupPlace}
-        isLoaded={isLoaded} // Pass isLoaded to AddressField
+        isLoaded={isLoaded}
       />
       <AddressField
         label="Drop Off Address"
@@ -89,7 +89,7 @@ const TripDetailsForm = ({ pickupPlace, onPlaceSelected, addViaPlace, isWaitAndR
         onPlaceSelected={(place) => onPlaceSelected(place, "dropoff")}
         isWaitAndReturn={isWaitAndReturn}
         pickupPlace={pickupPlace}
-        isLoaded={isLoaded} // Pass isLoaded to AddressField
+        isLoaded={isLoaded}
       />
 
       <DateTimePicker

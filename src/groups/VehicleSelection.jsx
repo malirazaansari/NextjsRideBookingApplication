@@ -37,7 +37,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   const calculateArrivalTime = (selectedDateTime) => {
     if (!selectedDateTime) return null;
     const date = new Date(selectedDateTime);
-    date.setMinutes(date.getMinutes() + 30); // Add 30 minutes to the selected time
+    date.setMinutes(date.getMinutes() + 30);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
@@ -64,14 +64,14 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     if (selectedDateTime) {
       const updatedFilteredVehicles = vehicles.map((vehicle) => ({
         ...vehicle,
-        eta: calculateArrivalTime(selectedDateTime), // Update ETA based on selected time
+        eta: calculateArrivalTime(selectedDateTime),
       }));
-      setFilteredVehicles(updatedFilteredVehicles); // Update filteredVehicles instead of vehicles
+      setFilteredVehicles(updatedFilteredVehicles);
     }
   }, [selectedDateTime, vehicles]);
 
   useEffect(() => {
-    setFilteredVehicles(vehicles); // Ensure filteredVehicles is initialized with vehicles
+    setFilteredVehicles(vehicles);
   }, [vehicles]);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     }
 
     try {
-      const response = await fetch("/api/stripe/create-payment", { // Corrected API route
+      const response = await fetch("/api/stripe/create-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -148,7 +148,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
           const updatedVehicles = vehicles.filter(
             (v) => v.passengers >= passengers && v.luggage >= luggage
           );
-          setFilteredVehicles(updatedVehicles); // Update filtered vehicles
+          setFilteredVehicles(updatedVehicles);
         }}
       />
 

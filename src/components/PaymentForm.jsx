@@ -14,11 +14,11 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
     const cardElement = elements.getElement(CardElement);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-payment`, { // Use NEXT_PUBLIC_BACKEND_URL
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, currency: "usd" }),
-         mode: 'cors', // Ensure CORS is enabled
+         mode: 'cors',
       });
 
       if (!response.ok) {

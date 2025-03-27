@@ -43,22 +43,22 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   useEffect(() => {
     if (isLoaded && autocompleteRef.current) {
       const autocomplete = new window.google.maps.places.Autocomplete(autocompleteRef.current, {
-        types: ["geocode"], // Restrict to address suggestions
+        types: ["geocode"],
       });
       autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete));
-      autocompleteRef.current.autocomplete = autocomplete; // Store the autocomplete instance
+      autocompleteRef.current.autocomplete = autocomplete;
     }
   }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded) {
       viaRefs.current.forEach((ref, index) => {
-        if (ref && ref.current && !ref.current.autocomplete) { // Ensure autocomplete is not re-initialized
+        if (ref && ref.current && !ref.current.autocomplete) {
           const autocomplete = new window.google.maps.places.Autocomplete(ref.current, {
             types: ["geocode"],
           });
           autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete, index));
-          ref.current.autocomplete = autocomplete; // Store the autocomplete instance
+          ref.current.autocomplete = autocomplete;
         }
       });
     }
@@ -91,7 +91,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
         value={value}
         onChange={(e) => setValue(e.target.value)}
         className="p-2 border border-gray-500 rounded-lg w-full"
-        onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
+        onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)}
         readOnly={isWaitAndReturn && label === "Drop Off Address"}
       />
 
@@ -108,7 +108,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
               setViaFields(updatedFields);
             }}
             className="p-2 border border-gray-500 rounded-lg w-full"
-            onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
+            onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)}
           />
           <button
             onClick={() => removeViaField(index)}
