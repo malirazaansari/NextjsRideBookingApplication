@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #121212;
+  --foreground: #e0e0e0;
+  --primary: #1e88e5;
+  --secondary: #424242;
+  --accent: #ff5722;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,12 +21,33 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #cfcfcf;
+    --primary: #2196f3;
+    --secondary: #333333;
+    --accent: #ff7043;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-sans text-gray-200;
+}
+
+button {
+  @apply bg-blue-600 hover:bg-orange-500 px-4 py-2 rounded-lg text-white transition;
+}
+
+input, select, textarea {
+  @apply bg-gray-800 px-3 py-2 border border-blue-600 rounded-lg text-gray-200 placeholder-gray-500;
+}
+
+a {
+  @apply text-blue-400 hover:text-orange-400 underline;
+}
+
+.card {
+  @apply bg-gray-800 shadow-lg p-4 rounded-lg text-gray-200;
+}
+
+.modal {
+  @apply bg-gray-900 shadow-xl p-6 rounded-lg text-gray-200;
 }
