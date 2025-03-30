@@ -171,7 +171,6 @@ const Home = () => {
   return (
     <Elements stripe={stripePromise}>
       <div className="relative flex h-screen">
-        {/* Left Section: Trip Details Form and Vehicle Selection */}
         <div className={`bg-blue-950 p-4 transition-all duration-300 ${isVisible ? "w-1/2 lg:w-1/2" : "w-full"} md:w-full sm:w-full overflow-y-auto`}>
           <TripDetailsForm
             onPlaceSelected={handlePlaceSelected}
