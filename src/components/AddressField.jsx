@@ -76,7 +76,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   }, [isWaitAndReturn, label, pickupPlace]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>Loading.....</div>;
   }
 
   return (
@@ -118,7 +118,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
         </div>
       ))}
 
-      {label === "Pick up Address" && viaFields.length < 3 && (
+      {label === "Pickup Address" && viaFields.length < 3 && (
         <button
           onClick={() => addViaField()}
           className="flex items-center gap-2 bg-blue-500 mt-2 px-3 py-2 rounded-lg text-white"
