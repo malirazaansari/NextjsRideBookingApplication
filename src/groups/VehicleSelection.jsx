@@ -53,7 +53,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
       { id: 3, name: "Estate Car", passengers: 4, luggage: 4, price: calculateDynamicPrice(1.5, distance), eta: "11:41", description: "Spacious estate car for extra luggage capacity.", icon: vehicleIcons["Estate Car"] },
       { id: 4, name: "MPV", passengers: 6, luggage: 2, price: calculateDynamicPrice(1.8, distance), eta: "11:41", description: "Multi-purpose vehicle with more seats and comfort.", icon: vehicleIcons["MPV"] },
       { id: 5, name: "Executive Car", passengers: 4, luggage: 2, price: calculateDynamicPrice(2.3, distance), eta: "11:41", description: "Premium car for executive travel.", icon: vehicleIcons["Executive Car"] },
-      { id: 6, name: "8 Seater Minibus", passengers: 8, luggage: 8, price: calculateDynamicPrice(2.5, distance), eta: "11:41", description: "Perfect for large groups with lots of luggage.", icon: vehicleIcons["8 Seater Minibus"] },
+      { id: 6, name: "8 Seater Minibus", passengers: 8, luggage: 8, price: calculateDynamicPrice(2.5, distance), eta: "11:41", description: "Perfect for large groups with lots of luggage.  Suitable for more then six people of group", icon: vehicleIcons["8 Seater Minibus"] },
       { id: 7, name: "Wheelchair Accessible Cars", passengers: 5, luggage: 0, price: calculateDynamicPrice(2.6, distance), eta: "11:41", description: "Car equipped for wheelchair access.", icon: vehicleIcons["Wheelchair Accessible Cars"] },
     ];
 
