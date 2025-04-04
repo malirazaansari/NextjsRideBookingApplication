@@ -174,7 +174,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
               className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
               onClick={() => setModalVehicle(null)}
             >
-              OK
+              Okay
             </button>
           </div>
         </div>
