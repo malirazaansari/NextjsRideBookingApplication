@@ -37,7 +37,7 @@ const VehicleFilter = ({ onApply }) => {
               className="px-2 text-xl"
               onClick={() => setPassengers(passengers + 1)}
             >
-              +
+              ++
             </button>
           </div>
 
