@@ -82,7 +82,7 @@ const VehicleFilter = ({ onApply }) => {
                 setIsOpen(false);
               }}
             >
-              Apply
+              Apply Filter
             </button>
           </div>
         </div>
