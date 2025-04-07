@@ -15,8 +15,8 @@ const WaitAndReturnModal = ({ onConfirm, onClose }) => (
           <button
             className="bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white"
             onClick={() => {
-              onConfirm(false);
-              onClose();
+              onConfirm(false); // Ensuring the function is correctly triggered
+              onClose(); // Close modal if onClose is provided
             }}
           >
             No
@@ -24,8 +24,8 @@ const WaitAndReturnModal = ({ onConfirm, onClose }) => (
           <button
             className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
             onClick={() => {
-              onConfirm(true);
-              onClose();
+              onConfirm(true); // Ensuring the function is correctly triggered
+              onClose(); // Close modal if onClose is provided
             }}
           >
             Yes

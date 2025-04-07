@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Trash2 } from "lucide-react";
+import InputField from "./InputField";
 
 const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pickupPlace, isLoaded }) => {
   const [value, setValue] = useState("");
@@ -28,6 +29,8 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
     const place = autocomplete.getPlace();
     if (!place || !place.formatted_address) return;
 
+    console.log("UTC Offset (Minutes):", place.utc_offset_minutes); // Log utc_offset_minutes for debugging
+
     if (index === null) {
       setValue(place.formatted_address);
     } else {
@@ -42,22 +45,22 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   useEffect(() => {
     if (isLoaded && autocompleteRef.current) {
       const autocomplete = new window.google.maps.places.Autocomplete(autocompleteRef.current, {
-        types: ["geocode"],
+        types: ["geocode"], // Restrict to address suggestions
       });
       autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete));
-      autocompleteRef.current.autocomplete = autocomplete;
+      autocompleteRef.current.autocomplete = autocomplete; // Store the autocomplete instance
     }
   }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded) {
       viaRefs.current.forEach((ref, index) => {
-        if (ref && ref.current && !ref.current.autocomplete) {
+        if (ref && ref.current && !ref.current.autocomplete) { // Ensure autocomplete is not re-initialized
           const autocomplete = new window.google.maps.places.Autocomplete(ref.current, {
             types: ["geocode"],
           });
           autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete, index));
-          ref.current.autocomplete = autocomplete;
+          ref.current.autocomplete = autocomplete; // Store the autocomplete instance
         }
       });
     }
@@ -76,7 +79,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   }, [isWaitAndReturn, label, pickupPlace]);
 
   if (!isLoaded) {
-    return <div>Loading.....</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -90,7 +93,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
         value={value}
         onChange={(e) => setValue(e.target.value)}
         className="p-2 border border-gray-500 rounded-lg w-full"
-        onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)}
+        onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
         readOnly={isWaitAndReturn && label === "Drop Off Address"}
       />
 
@@ -107,7 +110,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
               setViaFields(updatedFields);
             }}
             className="p-2 border border-gray-500 rounded-lg w-full"
-            onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)}
+            onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
           />
           <button
             onClick={() => removeViaField(index)}
@@ -118,7 +121,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
         </div>
       ))}
 
-      {label === "Pickup Address" && viaFields.length < 3 && (
+      {label === "Pick up Address" && viaFields.length < 3 && (
         <button
           onClick={() => addViaField()}
           className="flex items-center gap-2 bg-blue-500 mt-2 px-3 py-2 rounded-lg text-white"

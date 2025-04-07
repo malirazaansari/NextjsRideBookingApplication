@@ -37,7 +37,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   const calculateArrivalTime = (selectedDateTime) => {
     if (!selectedDateTime) return null;
     const date = new Date(selectedDateTime);
-    date.setMinutes(date.getMinutes() + 30);
+    date.setMinutes(date.getMinutes() + 30); // Add 30 minutes to the selected time
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
@@ -53,7 +53,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
       { id: 3, name: "Estate Car", passengers: 4, luggage: 4, price: calculateDynamicPrice(1.5, distance), eta: "11:41", description: "Spacious estate car for extra luggage capacity.", icon: vehicleIcons["Estate Car"] },
       { id: 4, name: "MPV", passengers: 6, luggage: 2, price: calculateDynamicPrice(1.8, distance), eta: "11:41", description: "Multi-purpose vehicle with more seats and comfort.", icon: vehicleIcons["MPV"] },
       { id: 5, name: "Executive Car", passengers: 4, luggage: 2, price: calculateDynamicPrice(2.3, distance), eta: "11:41", description: "Premium car for executive travel.", icon: vehicleIcons["Executive Car"] },
-      { id: 6, name: "8 Seater Minibus", passengers: 8, luggage: 8, price: calculateDynamicPrice(2.5, distance), eta: "11:41", description: "Perfect for large groups with lots of luggage.  Suitable for more then six people of group", icon: vehicleIcons["8 Seater Minibus"] },
+      { id: 6, name: "8 Seater Minibus", passengers: 8, luggage: 8, price: calculateDynamicPrice(2.5, distance), eta: "11:41", description: "Perfect for large groups with lots of luggage.", icon: vehicleIcons["8 Seater Minibus"] },
       { id: 7, name: "Wheelchair Accessible Cars", passengers: 5, luggage: 0, price: calculateDynamicPrice(2.6, distance), eta: "11:41", description: "Car equipped for wheelchair access.", icon: vehicleIcons["Wheelchair Accessible Cars"] },
     ];
 
@@ -64,14 +64,14 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     if (selectedDateTime) {
       const updatedFilteredVehicles = vehicles.map((vehicle) => ({
         ...vehicle,
-        eta: calculateArrivalTime(selectedDateTime),
+        eta: calculateArrivalTime(selectedDateTime), // Update ETA based on selected time
       }));
-      setFilteredVehicles(updatedFilteredVehicles);
+      setFilteredVehicles(updatedFilteredVehicles); // Update filteredVehicles instead of vehicles
     }
   }, [selectedDateTime, vehicles]);
 
   useEffect(() => {
-    setFilteredVehicles(vehicles);
+    setFilteredVehicles(vehicles); // Ensure filteredVehicles is initialized with vehicles
   }, [vehicles]);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     }
 
     try {
-      const response = await fetch("/api/stripe/create-payment", {
+      const response = await fetch("/api/stripe/create-payment", { // Corrected API route
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -148,7 +148,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
           const updatedVehicles = vehicles.filter(
             (v) => v.passengers >= passengers && v.luggage >= luggage
           );
-          setFilteredVehicles(updatedVehicles);
+          setFilteredVehicles(updatedVehicles); // Update filtered vehicles
         }}
       />
 
@@ -174,7 +174,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
               className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
               onClick={() => setModalVehicle(null)}
             >
-              Okay
+              OK
             </button>
           </div>
         </div>

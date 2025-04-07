@@ -11,16 +11,18 @@ const DateTimePicker = ({
 }) => (
   <div className="flex items-center gap-2 mt-4">
     <button
+    type="button"
       className={`px-4 py-2 rounded-lg ${
-        !isLaterSelected ? "bg-blue-600 text-white" : "bg-blue-300 text-black"
+        !isLaterSelected ? "bg-blue-600 text-white" : "bg-gray-300 text-black"
       }`}
       onClick={onNowClick}
     >
       Now
     </button>
     <button
+    type="button"
       className={`px-4 py-2 rounded-lg ${
-        isLaterSelected ? "bg-blue-600 text-white" : "bg-blue-300 text-black"
+        isLaterSelected ? "bg-blue-600 text-white" : "bg-gray-300 text-black"
       }`}
       onClick={onLaterClick}
     >
@@ -47,5 +49,6 @@ const DateTimePicker = ({
     </select>
   </div>
 );
+
 
 export default DateTimePicker;
