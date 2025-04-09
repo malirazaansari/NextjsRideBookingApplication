@@ -8,6 +8,8 @@ import GoogleMapComponent from "../components/GoogleMapComponent";
 import BookingSummaryModal from "../components/BookingSummaryModal";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+// import 'antd/dist/reset.css';
+
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
@@ -211,7 +213,7 @@ const Home = () => {
     <Elements stripe={stripePromise}>
       <div className="relative flex h-screen">
         {/* Left Section: Trip Details Form and Vehicle Selection */}
-        <div className={`bg-blue-950 p-4 transition-all duration-300 ${isVisible ? "w-1/2 lg:w-1/2" : "w-full"} md:w-full sm:w-full overflow-y-auto`}>
+        <div className={`bg-gray-100 p-4 transition-all duration-300 ${isVisible ? "w-1/2 lg:w-1/2" : "w-full"} md:w-full sm:w-full overflow-y-auto`}>
           <TripDetailsForm
             onPlaceSelected={handlePlaceSelected}
             addViaPlace={addViaPlace}

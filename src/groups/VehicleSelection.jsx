@@ -5,6 +5,9 @@ import PaymentForm from "../components/PaymentForm";
 import WaitAndReturnModal from "../components/WaitAndReturnModal";
 import VehicleCard from "../components/VehicleCard";
 
+import { Modal, Button } from 'antd';
+
+
 const vehicleIcons = {
   "Any Car": <BusFront size={24} />,
   "Saloon Car": <BusFront size={24} />,
@@ -138,7 +141,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   };
 
   return (
-    <div className="bg-gray-800 shadow-lg mx-auto p-6 pt-1 rounded-lg max-w-xl">
+    <div className="bg-gray-300 shadow-lg mx-auto p-6 pt-1 rounded-lg max-w-xl">
       <p className="font-semibold text-red-600 text-lg">Distance: {distance ? distance.toFixed(2) : "0.00"} km</p>
 
       <h2 className="mb-3 font-semibold text-lg">Choose your vehicle</h2>
@@ -165,20 +168,21 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
         ))}
       </div>
 
-      {modalVehicle && (
-        <div className="top-0 left-0 z-50 fixed flex justify-center items-center bg-gray-500/50 w-screen h-screen">
-          <div className="bg-gray-800 shadow-lg p-6 rounded-lg w-full max-w-sm text-center">
-            <h2 className="font-bold text-lg">{modalVehicle.name}</h2>
-            <p className="mt-2 text-sm">{modalVehicle.description}</p>
-            <button
-              className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
-              onClick={() => setModalVehicle(null)}
+        {modalVehicle && (
+            <Modal
+                open={!!modalVehicle}
+                onCancel={() => setModalVehicle(null)}
+                footer={[
+                <Button key="ok" type="primary" onClick={() => setModalVehicle(null)}>
+                    OK
+                </Button>,
+                ]}
+                title={modalVehicle.name}
             >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
+                <p>{modalVehicle.description}</p>
+            </Modal>
+         )}
+
 
       <h2 className="mt-5 font-semibold text-lg">Extras</h2>
       <div className="flex flex-col">
@@ -214,24 +218,29 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
         </label>
       </div>
 
-      {showWaitAndReturnInfoModal && (
-        <div className="top-0 left-0 z-50 fixed flex justify-center items-center bg-gray-500/50 w-screen h-screen">
-          <div className="bg-gray-800 shadow-lg p-6 rounded-lg w-full max-w-sm text-center">
-            <h2 className="font-bold text-lg">Wait and Return</h2>
-            <p className="mt-2 text-sm">
-              Choose this option for the best price if you want the driver to wait for you at your destination and take you back to the same place where you were picked up from (waiting charges may apply).
-              <br /><br />
-              This option will automatically use your pick up address as your final destination.
-            </p>
-            <button
-              className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
-              onClick={() => setShowWaitAndReturnInfoModal(false)}
+        <Modal
+        open={showWaitAndReturnInfoModal}
+        onCancel={() => setShowWaitAndReturnInfoModal(false)}
+        footer={[
+            <Button
+            key="ok"
+            type="primary"
+            onClick={() => setShowWaitAndReturnInfoModal(false)}
             >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
+            OK
+            </Button>,
+        ]}
+        title="Wait and Return"
+        centered
+        >
+        <p>
+            Choose this option for the best price if you want the driver to wait for you at your destination and take you back to the same place where you were picked up from
+            <strong> (waiting charges may apply)</strong>.
+        </p>
+        <p>
+            This option will automatically use your pick up address as your final destination.
+        </p>
+        </Modal>
 
       {showWaitAndReturnModal && (
         <WaitAndReturnModal

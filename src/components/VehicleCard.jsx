@@ -3,7 +3,7 @@ import { Info } from "lucide-react";
 const VehicleCard = ({ vehicle, selectedVehicle, onSelect, distance, setModalVehicle }) => (
   <div
     className={`border rounded-lg p-4 flex flex-col items-center cursor-pointer text-center w-40 shadow-md transition-all ${
-      selectedVehicle?.id === vehicle.id ? "bg-blue-500 text-white" : "bg-gray-800 hover:bg-gray-500"
+      selectedVehicle?.id === vehicle.id ? "bg-blue-500 text-white" : "bg-gray-400 hover:bg-gray-500"
     }`}
     onClick={() => onSelect(vehicle)}
   >

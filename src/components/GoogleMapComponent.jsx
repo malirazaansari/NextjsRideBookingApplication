@@ -78,7 +78,7 @@ const GoogleMapComponent = ({ isVisible, pickupPlace, dropoffPlace, viaPlaces, i
   }
 
   return (
-    <div className={`fixed top-0 right-0 h-screen w-1/2 bg-gray-800 shadow-lg transition-transform duration-300 ${isVisible ? "translate-x-0" : "translate-x-full"}`}>
+    <div className={`fixed top-0 right-0 h-screen w-1/2 bg-gray-100 shadow-lg transition-transform duration-300 ${isVisible ? "translate-x-0" : "translate-x-full"}`}>
       <div className="w-full h-full">
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "100%" }}

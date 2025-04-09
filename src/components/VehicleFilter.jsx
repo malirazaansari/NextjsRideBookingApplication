@@ -1,93 +1,73 @@
 import { useState } from "react";
-import { Funnel, funnel } from "lucide-react";
+import { Funnel } from "lucide-react";
+import { Modal, Button, InputNumber, Space } from "antd";
 
 const VehicleFilter = ({ onApply }) => {
   const [passengers, setPassengers] = useState(1);
   const [luggage, setLuggage] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleApply = () => {
+    onApply(passengers, luggage);
+    setIsOpen(false);
+  };
+
+  const handleClear = () => {
+    setPassengers(1);
+    setLuggage(0);
+  };
+
   return (
-    <div className="inline-block relative">
-      <button
-        className="flex items-center gap-2 bg-blue-500 px-4 py-2 rounded text-white"
-        onClick={() => setIsOpen(!isOpen)}
+    <>
+      <Button
+        type="primary"
+        icon={<Funnel size={16} />}
+        onClick={() => setIsOpen(true)}
       >
-        <Funnel /> Filter
-      </button>
+        Filter
+      </Button>
 
-      {isOpen && (
-        <div className="left-0 z-10 absolute bg-gray-800 shadow-lg mt-2 p-4 rounded w-48">
-          <div className="flex justify-between items-center">
-            <button
-              className="px-2 text-xl"
-              onClick={() => setPassengers(Math.max(1, passengers - 1))}
-            >
-              -
-            </button>
-            <div className="text-center">
-              <p className="font-semibold text-sm">Passengers</p>
-              <input
-                type="number"
-                className="p-1 border rounded w-16 text-center"
-                value={passengers}
-                readOnly
-              />
-            </div>
-            <button
-              className="px-2 text-xl"
-              onClick={() => setPassengers(passengers + 1)}
-            >
-              +
-            </button>
+      <Modal
+        open={isOpen}
+        onCancel={() => setIsOpen(false)}
+        onOk={handleApply}
+        title="Filter Vehicles"
+        centered
+        okText="Apply"
+        footer={[
+          <Button key="clear" onClick={handleClear}>
+            Clear
+          </Button>,
+          <Button key="cancel" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>,
+          <Button key="apply" type="primary" onClick={handleApply}>
+            Apply
+          </Button>,
+        ]}
+      >
+        <div className="flex flex-col gap-4">
+          <div>
+            <p className="mb-1 font-semibold">Passengers</p>
+            <InputNumber
+              min={1}
+              value={passengers}
+              onChange={setPassengers}
+              className="w-full"
+            />
           </div>
-
-          <div className="flex justify-between items-center mt-3">
-            <button
-              className="px-2 text-xl"
-              onClick={() => setLuggage(Math.max(0, luggage - 1))}
-            >
-              -
-            </button>
-            <div className="text-center">
-              <p className="font-semibold text-sm">Luggage</p>
-              <input
-                type="number"
-                className="p-1 border rounded w-16 text-center"
-                value={luggage}
-                readOnly
-              />
-            </div>
-            <button
-              className="px-2 text-xl"
-              onClick={() => setLuggage(luggage + 1)}
-            >
-              +
-            </button>
-          </div>
-
-          <div className="flex justify-between mt-4">
-            <button
-              className="bg-gray-300 px-4 py-1 rounded text-black"
-              onClick={() => {
-                setPassengers(1);
-                setLuggage(0);
-              }}
-            >
-              Clear
-            </button>
-            <button
-              className="bg-blue-500 px-4 py-1 rounded text-white"
-              onClick={() => {
-                onApply(passengers, luggage); // Apply the filter
-                setIsOpen(false); // Close the filter dropdown
-              }}
-            >
-              Apply
-            </button>
+          <div>
+            <p className="mb-1 font-semibold">Luggage</p>
+            <InputNumber
+              min={0}
+              value={luggage}
+              onChange={setLuggage}
+              className="w-full"
+            />
           </div>
         </div>
-      )}
-    </div>
+      </Modal>
+    </>
   );
 };
 

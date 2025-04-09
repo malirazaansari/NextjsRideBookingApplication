@@ -1,6 +1,6 @@
 const BookingSummaryModal = ({ bookingSummary, onClose }) => (
   <div className="top-0 left-0 z-50 fixed flex justify-center items-center bg-gray-500/50 w-screen h-screen">
-    <div className="bg-gray-800 shadow-lg p-6 rounded-lg w-full max-w-sm text-center">
+    <div className="bg-gray-200 shadow-lg p-6 rounded-lg w-full max-w-sm text-center">
       <h2 className="font-bold text-lg">Booking Summary</h2>
       <p className="mt-2 text-sm">
         <strong>Pickup Place:</strong> {bookingSummary.pickupPlace?.formatted_address || "N/A"} <br />

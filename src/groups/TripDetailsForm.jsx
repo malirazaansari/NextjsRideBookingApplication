@@ -64,7 +64,7 @@ const TripDetailsForm = ({ pickupPlace, onPlaceSelected, addViaPlace, isWaitAndR
   }, [formData, onTripDetailsChange]);
 
   return (
-    <div className="bg-gray-800 shadow-lg mx-auto p-4 pb-1 rounded-lg max-w-xl">
+    <div className="bg-gray-300 shadow-lg mx-auto p-4 pb-1 rounded-lg max-w-xl">
       <ProgressTracker />
       <h2 className="mb-4 font-bold text-xl text-center">Your trip details</h2>
 
