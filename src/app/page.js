@@ -159,6 +159,7 @@ const Home = () => {
       distance,
       tripDetails,
       selectedVehicle,
+      price: selectedVehicle?.price,
       extras,
       paymentMethod,
       selectedDateTime,

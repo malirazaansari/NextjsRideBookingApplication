@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         Phone: ${bookingSummary.tripDetails.phone}
         Notes: ${bookingSummary.tripDetails.notes || "None"}
         Selected Vehicle: ${bookingSummary.selectedVehicle?.name || "N/A"}
+        Price: $${bookingSummary.selectedVehicle?.price}
         Extras: ${bookingSummary.extras.meetAndGreet ? "Meet and Greet" : "None"} ${
         bookingSummary.extras.waitAndReturn ? ", Wait and Return" : ""
       }

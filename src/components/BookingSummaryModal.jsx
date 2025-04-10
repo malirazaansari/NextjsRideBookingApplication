@@ -49,6 +49,7 @@ const BookingSummaryModal = ({ bookingSummary, onClose }) => {
         <p>
           <strong>Selected Vehicle:</strong> {bookingSummary.selectedVehicle?.name || "N/A"}
         </p>
+        <p><strong>Price:</strong> ${bookingSummary.price}</p>
         <p>
           <strong>Extras:</strong>{" "}
           {bookingSummary.extras.meetAndGreet ? "Meet and Greet" : "None"}
