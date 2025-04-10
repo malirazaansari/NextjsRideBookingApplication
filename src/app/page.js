@@ -38,6 +38,7 @@ const Home = () => {
   const [showBookingSummaryModal, setShowBookingSummaryModal] = useState(false);
   const [bookingSummary, setBookingSummary] = useState(null);
   const [selectedDateTime, setSelectedDateTime] = useState(null);
+  const [formKey, setFormKey] = useState(Date.now());
 
   const [tripDetails, setTripDetails] = useState({
     name: "",
@@ -166,7 +167,7 @@ const Home = () => {
     setShowBookingSummaryModal(true);
   };
 
-  const handleBookingConfirmation = async () => {
+const handleBookingConfirmation = async () => {
     try {
       const response = await fetch("/api/email/sendSimpleEmail", {
         method: "POST",
@@ -178,14 +179,11 @@ const Home = () => {
 
       if (response.ok) {
         console.log("Simple booking email sent successfully!");
-        // alert("📩 Simple booking email sent successfully!");
       } else {
         console.error("Failed to send simple booking email");
-        // alert("❌ Failed to send simple booking email. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
-    //   alert("⚠ An error occurred while sending the simple email.");
     }
 
     setShowBookingSummaryModal(false);
@@ -200,9 +198,9 @@ const Home = () => {
     setExtras({ meetAndGreet: false, waitAndReturn: false });
     setPaymentMethod(null);
     setSelectedDateTime(null);
-
-    window.location.reload();
+    setFormKey(Date.now());
   };
+
 
   if (!isLoaded) {
     return <div>Loading Google Maps...</div>;
@@ -211,7 +209,7 @@ const Home = () => {
   return (
     <Elements stripe={stripePromise}>
 
-      <div className="relative flex h-screen">
+      <div className="relative flex h-screen" key={formKey}>
   <div
     className={`bg-[var(--color-background)] text-[var(--color-foreground)] p-4 transition-all duration-300 ${
       isVisible ? "w-1/2 lg:w-1/2" : "w-full"
