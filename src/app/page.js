@@ -13,9 +13,8 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
-const libraries = ["places"]; // Define libraries as a constant outside the component
+const libraries = ["places"];
 
-// Helper function to sanitize place objects
 const sanitizePlace = (place) => {
   if (!place) return null;
   return {
@@ -54,13 +53,13 @@ const Home = () => {
   });
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, // Ensure this environment variable is set
-    libraries, // Use the constant libraries array
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries,
   });
 
   const handlePlaceSelected = (place, type, index = null) => {
     if (place) {
-      console.log("UTC Offset (Minutes):", place.utc_offset_minutes); // Log utc_offset_minutes for debugging
+      console.log("UTC Offset (Minutes):", place.utc_offset_minutes);
     }
     if (type === "pickup") {
       setPickupPlace(place);
@@ -70,12 +69,12 @@ const Home = () => {
       const updatedViaPlaces = [...viaPlaces];
       if (index !== null) {
         if (place === null) {
-          updatedViaPlaces.splice(index, 1); // Remove the via place if null
+          updatedViaPlaces.splice(index, 1);
         } else {
-          updatedViaPlaces[index] = place; // Update the via place
+          updatedViaPlaces[index] = place;
         }
       }
-      setViaPlaces(updatedViaPlaces); // Update the state
+      setViaPlaces(updatedViaPlaces);
     }
 
     if (pickupPlace && dropoffPlace) {
@@ -111,7 +110,7 @@ const Home = () => {
   const calculateDistance = async () => {
     if (pickupPlace && dropoffPlace) {
       const service = new window.google.maps.DistanceMatrixService();
-      const waypoints = [pickupPlace, ...viaPlaces.filter((place) => place !== null), dropoffPlace]; // Filter out null values
+      const waypoints = [pickupPlace, ...viaPlaces.filter((place) => place !== null), dropoffPlace];
 
       let totalDistance = 0;
 
@@ -158,10 +157,10 @@ const Home = () => {
       isWaitAndReturn,
       distance,
       tripDetails,
-      selectedVehicle, // This now contains the full vehicle object
+      selectedVehicle,
       extras,
       paymentMethod,
-      selectedDateTime, // Include date and time in booking data
+      selectedDateTime,
     };
     setBookingSummary(bookingData);
     setShowBookingSummaryModal(true);
@@ -200,20 +199,19 @@ const Home = () => {
     setSelectedVehicle(null);
     setExtras({ meetAndGreet: false, waitAndReturn: false });
     setPaymentMethod(null);
-    setSelectedDateTime(null); // Reset date and time
+    setSelectedDateTime(null);
 
-    window.location.reload(); // Force a full page reload to reset the UI
+    window.location.reload();
   };
 
   if (!isLoaded) {
-    return <div>Loading Google Maps...</div>; // Show a loading state until the API is loaded
+    return <div>Loading Google Maps...</div>;
   }
 
   return (
     <Elements stripe={stripePromise}>
 
       <div className="relative flex h-screen">
-  {/* Left Section: Trip Details Form and Vehicle Selection */}
   <div
     className={`bg-[var(--color-background)] text-[var(--color-foreground)] p-4 transition-all duration-300 ${
       isVisible ? "w-1/2 lg:w-1/2" : "w-full"
@@ -242,7 +240,6 @@ const Home = () => {
     />
   </div>
 
-  {/* Toggle Button for Map Visibility */}
   <button
     onClick={() => setIsVisible(!isVisible)}
     className="hidden lg:block top-2 right-15 z-50 fixed bg-[var(--color-primary)] hover:bg-[var(--color-accent)] shadow-md px-3 py-2 rounded-md text-white"
@@ -250,7 +247,6 @@ const Home = () => {
     {isVisible ? "Hide Map" : "Show Map"}
   </button>
 
-  {/* Right Section: Google Map */}
   <div className="hidden lg:block">
     <GoogleMapComponent
       isVisible={isVisible}
@@ -264,7 +260,6 @@ const Home = () => {
     />
   </div>
 
-  {/* Booking Summary Modal */}
   {showBookingSummaryModal && (
     <BookingSummaryModal
       bookingSummary={bookingSummary}
