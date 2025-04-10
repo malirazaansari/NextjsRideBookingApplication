@@ -29,7 +29,7 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
     const place = autocomplete.getPlace();
     if (!place || !place.formatted_address) return;
 
-    console.log("UTC Offset (Minutes):", place.utc_offset_minutes); // Log utc_offset_minutes for debugging
+    console.log("UTC Offset (Minutes):", place.utc_offset_minutes);
 
     if (index === null) {
       setValue(place.formatted_address);
@@ -45,22 +45,22 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   useEffect(() => {
     if (isLoaded && autocompleteRef.current) {
       const autocomplete = new window.google.maps.places.Autocomplete(autocompleteRef.current, {
-        types: ["geocode"], // Restrict to address suggestions
+        types: ["geocode"],
       });
       autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete));
-      autocompleteRef.current.autocomplete = autocomplete; // Store the autocomplete instance
+      autocompleteRef.current.autocomplete = autocomplete;
     }
   }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded) {
       viaRefs.current.forEach((ref, index) => {
-        if (ref && ref.current && !ref.current.autocomplete) { // Ensure autocomplete is not re-initialized
+        if (ref && ref.current && !ref.current.autocomplete) {
           const autocomplete = new window.google.maps.places.Autocomplete(ref.current, {
             types: ["geocode"],
           });
           autocomplete.addListener("place_changed", () => handlePlaceSelected(autocomplete, index));
-          ref.current.autocomplete = autocomplete; // Store the autocomplete instance
+          ref.current.autocomplete = autocomplete;
         }
       });
     }

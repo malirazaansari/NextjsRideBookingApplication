@@ -14,11 +14,11 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
     const cardElement = elements.getElement(CardElement);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-payment`, { // Use NEXT_PUBLIC_BACKEND_URL
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stripe/create-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, currency: "usd" }),
-         mode: 'cors', // Ensure CORS is enabled
+         mode: 'cors',
       });
 
       if (!response.ok) {
@@ -45,16 +45,7 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
   };
 
   return (
-    // <div>
-    //   <CardElement className="p-2 border rounded-lg" />
-    //   <button
-    //     className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
-    //     onClick={handlePayment}
-    //     disabled={isProcessing}
-    //   >
-    //     {isProcessing ? "Processing..." : "Pay And Book Now"}
-    //   </button>
-    // </div>
+
     <div>
   <CardElement className="bg-[var(--color-background)] p-2 border border-[var(--color-primary)] rounded-lg text-[var(--color-foreground)]" />
   <button
