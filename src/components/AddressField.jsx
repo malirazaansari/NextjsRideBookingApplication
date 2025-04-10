@@ -83,53 +83,56 @@ const AddressField = ({ label, onPlaceSelected, addViaPlace, isWaitAndReturn, pi
   }
 
   return (
-    <div className="mb-4 p-4 border border-gray-600 rounded-lg">
-      <label className="block mb-1 font-semibold text-sm">{label}</label>
+    <div className="bg-[var(--color-background)] mb-4 p-4 border border-[var(--color-primary)] rounded-lg">
+  <label className="block mb-1 font-semibold text-[var(--color-foreground)] text-sm">
+    {label}
+  </label>
 
+  <input
+    ref={autocompleteRef}
+    type="text"
+    placeholder="Search for Address..."
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    className="bg-[var(--color-background)] p-2 border border-[var(--color-primary)] rounded-lg w-full text-[var(--color-foreground)]"
+    onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)}
+    readOnly={isWaitAndReturn && label === "Drop Off Address"}
+  />
+
+  {viaFields.map((_, index) => (
+    <div key={index} className="flex items-center gap-2 mt-2">
       <input
-        ref={autocompleteRef}
+        ref={viaRefs.current[index]}
         type="text"
-        placeholder="Search for Address..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className="p-2 border border-gray-500 rounded-lg w-full"
-        onFocus={() => autocompleteRef.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
-        readOnly={isWaitAndReturn && label === "Drop Off Address"}
+        placeholder={`Via Address ${index + 1}`}
+        value={viaFields[index]}
+        onChange={(e) => {
+          const updatedFields = [...viaFields];
+          updatedFields[index] = e.target.value;
+          setViaFields(updatedFields);
+        }}
+        className="bg-[var(--color-background)] p-2 border border-[var(--color-primary)] rounded-lg w-full text-[var(--color-foreground)]"
+        onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)}
       />
-
-      {viaFields.map((_, index) => (
-        <div key={index} className="flex items-center gap-2 mt-2">
-          <input
-            ref={viaRefs.current[index]}
-            type="text"
-            placeholder={`Via Address ${index + 1}`}
-            value={viaFields[index]}
-            onChange={(e) => {
-              const updatedFields = [...viaFields];
-              updatedFields[index] = e.target.value;
-              setViaFields(updatedFields);
-            }}
-            className="p-2 border border-gray-500 rounded-lg w-full"
-            onFocus={() => viaRefs.current[index]?.current?.autocomplete?.setBounds?.(null)} // Correctly handle setBounds
-          />
-          <button
-            onClick={() => removeViaField(index)}
-            className="text-red-500 hover:text-red-700"
-          >
-            <Trash2 size={20} />
-          </button>
-        </div>
-      ))}
-
-      {label === "Pick up Address" && viaFields.length < 3 && (
-        <button
-          onClick={() => addViaField()}
-          className="flex items-center gap-2 bg-blue-500 mt-2 px-3 py-2 rounded-lg text-white"
-        >
-          Add Via <span className="text-lg">+</span>
-        </button>
-      )}
+      <button
+        onClick={() => removeViaField(index)}
+        className="text-red-500 hover:text-red-700"
+      >
+        <Trash2 size={20} />
+      </button>
     </div>
+  ))}
+
+  {label === "Pick up Address" && viaFields.length < 3 && (
+    <button
+      onClick={() => addViaField()}
+      className="flex items-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-accent)] mt-2 px-3 py-2 rounded-lg text-white"
+    >
+      Add Via <span className="text-lg">+</span>
+    </button>
+  )}
+</div>
+
   );
 };
 

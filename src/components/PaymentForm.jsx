@@ -45,16 +45,27 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
   };
 
   return (
+    // <div>
+    //   <CardElement className="p-2 border rounded-lg" />
+    //   <button
+    //     className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
+    //     onClick={handlePayment}
+    //     disabled={isProcessing}
+    //   >
+    //     {isProcessing ? "Processing..." : "Pay And Book Now"}
+    //   </button>
+    // </div>
     <div>
-      <CardElement className="p-2 border rounded-lg" />
-      <button
-        className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
-        onClick={handlePayment}
-        disabled={isProcessing}
-      >
-        {isProcessing ? "Processing..." : "Pay And Book Now"}
-      </button>
-    </div>
+  <CardElement className="bg-[var(--color-background)] p-2 border border-[var(--color-primary)] rounded-lg text-[var(--color-foreground)]" />
+  <button
+    className="bg-[var(--color-primary)] hover:bg-[var(--color-accent)] mt-4 px-6 py-2 rounded text-white"
+    onClick={handlePayment}
+    disabled={isProcessing}
+  >
+    {isProcessing ? "Processing..." : "Pay And Book Now"}
+  </button>
+</div>
+
   );
 };
 

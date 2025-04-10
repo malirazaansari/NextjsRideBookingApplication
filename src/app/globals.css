@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+/*
 :root {
   --background: #121212;
   --foreground: #e0e0e0;
@@ -50,4 +50,56 @@ a {
 
 .modal {
   @apply bg-gray-900 shadow-xl p-6 rounded-lg text-gray-200;
+} */
+
+/* @tailwind base;
+@tailwind components; */
+@tailwind utilities;
+
+/* Light Theme Variables */
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  --color-primary: #1e88e5;
+  --color-secondary: #f3f4f6;
+  --color-accent: #ff5722;
+
+  --font-sans: system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Example element styles using Tailwind classes + variables */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--color-accent);
+}
+
+input, select, textarea {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-primary);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.card {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }

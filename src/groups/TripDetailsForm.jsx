@@ -64,48 +64,113 @@ const TripDetailsForm = ({ pickupPlace, onPlaceSelected, addViaPlace, isWaitAndR
   }, [formData, onTripDetailsChange]);
 
   return (
-    <div className="bg-gray-300 shadow-lg mx-auto p-4 pb-1 rounded-lg max-w-xl">
-      <ProgressTracker />
-      <h2 className="mb-4 font-bold text-xl text-center">Your trip details</h2>
+    // <div className="bg-gray-300 shadow-lg mx-auto p-4 pb-1 rounded-lg max-w-xl">
+    //   <ProgressTracker />
+    //   <h2 className="mb-4 font-bold text-xl text-center">Your trip details</h2>
 
-      <InputField label="Name" placeholder="Enter your name" value={formData.name}
-        onChange={(e) => handleInputChange("name", e.target.value)}/>
-      <PhoneNumberInput label="Phone Number" value={formData.phone} onChange={(phone) => handleInputChange("phone", phone)} />
-      <InputField label="Email" type="email" placeholder="Enter your email" value={formData.email}
-        onChange={(e) => handleInputChange("email", e.target.value)}/>
+    //   <InputField label="Name" placeholder="Enter your name" value={formData.name}
+    //     onChange={(e) => handleInputChange("name", e.target.value)}/>
+    //   <PhoneNumberInput label="Phone Number" value={formData.phone} onChange={(phone) => handleInputChange("phone", phone)} />
+    //   <InputField label="Email" type="email" placeholder="Enter your email" value={formData.email}
+    //     onChange={(e) => handleInputChange("email", e.target.value)}/>
 
-      <AddressField
-        label="Pick up Address"
-        value={pickupPlace}
-        onPlaceSelected={(place, index) => onPlaceSelected(place, index === null ? "pickup" : "via", index)}
-        addViaPlace={addViaPlace}
-        isWaitAndReturn={isWaitAndReturn}
-        pickupPlace={pickupPlace}
-        isLoaded={isLoaded} // Pass isLoaded to AddressField
-      />
-      <AddressField
-        label="Drop Off Address"
-        value={pickupPlace}
-        onPlaceSelected={(place) => onPlaceSelected(place, "dropoff")}
-        isWaitAndReturn={isWaitAndReturn}
-        pickupPlace={pickupPlace}
-        isLoaded={isLoaded} // Pass isLoaded to AddressField
-      />
+    //   <AddressField
+    //     label="Pick up Address"
+    //     value={pickupPlace}
+    //     onPlaceSelected={(place, index) => onPlaceSelected(place, index === null ? "pickup" : "via", index)}
+    //     addViaPlace={addViaPlace}
+    //     isWaitAndReturn={isWaitAndReturn}
+    //     pickupPlace={pickupPlace}
+    //     isLoaded={isLoaded} // Pass isLoaded to AddressField
+    //   />
+    //   <AddressField
+    //     label="Drop Off Address"
+    //     value={pickupPlace}
+    //     onPlaceSelected={(place) => onPlaceSelected(place, "dropoff")}
+    //     isWaitAndReturn={isWaitAndReturn}
+    //     pickupPlace={pickupPlace}
+    //     isLoaded={isLoaded} // Pass isLoaded to AddressField
+    //   />
 
-      <DateTimePicker
-        selectedDate={selectedDate}
-        selectedHour={selectedHour}
-        selectedMinute={selectedMinute}
-        onDateChange={setSelectedDate}
-        onHourChange={setSelectedHour}
-        onMinuteChange={setSelectedMinute}
-        isLaterSelected={isLaterSelected}
-        onNowClick={() => setIsLaterSelected(false)}
-        onLaterClick={() => setIsLaterSelected(true)}
-      />
+    //   <DateTimePicker
+    //     selectedDate={selectedDate}
+    //     selectedHour={selectedHour}
+    //     selectedMinute={selectedMinute}
+    //     onDateChange={setSelectedDate}
+    //     onHourChange={setSelectedHour}
+    //     onMinuteChange={setSelectedMinute}
+    //     isLaterSelected={isLaterSelected}
+    //     onNowClick={() => setIsLaterSelected(false)}
+    //     onLaterClick={() => setIsLaterSelected(true)}
+    //   />
 
-      <InputField label="Notes for the driver" placeholder="Any additional notes..." value={formData.notes} onChange={(e) => handleInputChange("notes", e.target.value)} />
-    </div>
+    //   <InputField label="Notes for the driver" placeholder="Any additional notes..." value={formData.notes} onChange={(e) => handleInputChange("notes", e.target.value)} />
+    // </div>
+    <div className="bg-[var(--color-secondary)] shadow-lg mx-auto p-4 pb-1 rounded-lg max-w-xl">
+  <ProgressTracker />
+  <h2 className="mb-4 font-bold text-[var(--color-foreground)] text-xl text-center">
+    Your trip details
+  </h2>
+
+  <InputField
+    label="Name"
+    placeholder="Enter your name"
+    value={formData.name}
+    onChange={(e) => handleInputChange("name", e.target.value)}
+  />
+  <PhoneNumberInput
+    label="Phone Number"
+    value={formData.phone}
+    onChange={(phone) => handleInputChange("phone", phone)}
+  />
+  <InputField
+    label="Email"
+    type="email"
+    placeholder="Enter your email"
+    value={formData.email}
+    onChange={(e) => handleInputChange("email", e.target.value)}
+  />
+
+  <AddressField
+    label="Pick up Address"
+    value={pickupPlace}
+    onPlaceSelected={(place, index) =>
+      onPlaceSelected(place, index === null ? "pickup" : "via", index)
+    }
+    addViaPlace={addViaPlace}
+    isWaitAndReturn={isWaitAndReturn}
+    pickupPlace={pickupPlace}
+    isLoaded={isLoaded}
+  />
+  <AddressField
+    label="Drop Off Address"
+    value={pickupPlace}
+    onPlaceSelected={(place) => onPlaceSelected(place, "dropoff")}
+    isWaitAndReturn={isWaitAndReturn}
+    pickupPlace={pickupPlace}
+    isLoaded={isLoaded}
+  />
+
+  <DateTimePicker
+    selectedDate={selectedDate}
+    selectedHour={selectedHour}
+    selectedMinute={selectedMinute}
+    onDateChange={setSelectedDate}
+    onHourChange={setSelectedHour}
+    onMinuteChange={setSelectedMinute}
+    isLaterSelected={isLaterSelected}
+    onNowClick={() => setIsLaterSelected(false)}
+    onLaterClick={() => setIsLaterSelected(true)}
+  />
+
+  <InputField
+    label="Notes for the driver"
+    placeholder="Any additional notes..."
+    value={formData.notes}
+    onChange={(e) => handleInputChange("notes", e.target.value)}
+  />
+</div>
+
   );
 };
 

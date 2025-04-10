@@ -19,55 +19,66 @@ const VehicleFilter = ({ onApply }) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        icon={<Funnel size={16} />}
-        onClick={() => setIsOpen(true)}
-      >
-        Filter
-      </Button>
+  <Button
+    type="primary"
+    icon={<Funnel size={16} />}
+    onClick={() => setIsOpen(true)}
+    className="!bg-[var(--color-primary)] hover:!bg-[var(--color-accent)] !text-white"
+  >
+    Filter
+  </Button>
 
-      <Modal
-        open={isOpen}
-        onCancel={() => setIsOpen(false)}
-        onOk={handleApply}
-        title="Filter Vehicles"
-        centered
-        okText="Apply"
-        footer={[
-          <Button key="clear" onClick={handleClear}>
-            Clear
-          </Button>,
-          <Button key="cancel" onClick={() => setIsOpen(false)}>
-            Cancel
-          </Button>,
-          <Button key="apply" type="primary" onClick={handleApply}>
-            Apply
-          </Button>,
-        ]}
+  <Modal
+    open={isOpen}
+    onCancel={() => setIsOpen(false)}
+    onOk={handleApply}
+    title="Filter Vehicles"
+    centered
+    okText="Apply"
+    footer={[
+      <Button key="clear" onClick={handleClear}>
+        Clear
+      </Button>,
+      <Button key="cancel" onClick={() => setIsOpen(false)}>
+        Cancel
+      </Button>,
+      <Button
+        key="apply"
+        type="primary"
+        onClick={handleApply}
+        className="!bg-[var(--color-primary)] hover:!bg-[var(--color-accent)] !text-white"
       >
-        <div className="flex flex-col gap-4">
-          <div>
-            <p className="mb-1 font-semibold">Passengers</p>
-            <InputNumber
-              min={1}
-              value={passengers}
-              onChange={setPassengers}
-              className="w-full"
-            />
-          </div>
-          <div>
-            <p className="mb-1 font-semibold">Luggage</p>
-            <InputNumber
-              min={0}
-              value={luggage}
-              onChange={setLuggage}
-              className="w-full"
-            />
-          </div>
-        </div>
-      </Modal>
-    </>
+        Apply
+      </Button>,
+    ]}
+  >
+    <div className="flex flex-col gap-4">
+      <div>
+        <p className="mb-1 font-semibold text-[var(--color-foreground)]">
+          Passengers
+        </p>
+        <InputNumber
+          min={1}
+          value={passengers}
+          onChange={setPassengers}
+          className="w-full"
+        />
+      </div>
+      <div>
+        <p className="mb-1 font-semibold text-[var(--color-foreground)]">
+          Luggage
+        </p>
+        <InputNumber
+          min={0}
+          value={luggage}
+          onChange={setLuggage}
+          className="w-full"
+        />
+      </div>
+    </div>
+  </Modal>
+</>
+
   );
 };
 
