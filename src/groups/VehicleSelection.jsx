@@ -40,7 +40,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   const calculateArrivalTime = (selectedDateTime) => {
     if (!selectedDateTime) return null;
     const date = new Date(selectedDateTime);
-    date.setMinutes(date.getMinutes() + 30); // Add 30 minutes to the selected time
+    date.setMinutes(date.getMinutes() + 30);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
@@ -67,14 +67,14 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     if (selectedDateTime) {
       const updatedFilteredVehicles = vehicles.map((vehicle) => ({
         ...vehicle,
-        eta: calculateArrivalTime(selectedDateTime), // Update ETA based on selected time
+        eta: calculateArrivalTime(selectedDateTime),
       }));
-      setFilteredVehicles(updatedFilteredVehicles); // Update filteredVehicles instead of vehicles
+      setFilteredVehicles(updatedFilteredVehicles);
     }
   }, [selectedDateTime, vehicles]);
 
   useEffect(() => {
-    setFilteredVehicles(vehicles); // Ensure filteredVehicles is initialized with vehicles
+    setFilteredVehicles(vehicles);
   }, [vehicles]);
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   const handlePaymentSuccess = (paymentId) => {
     console.log("Payment successful with ID:", paymentId);
     setIsPaymentCompleted(true);
-    onBookNow(); // Proceed with booking after payment
+    onBookNow();
   };
 
   const handlePayByCard = async () => {
@@ -119,7 +119,7 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
     }
 
     try {
-      const response = await fetch("/api/stripe/create-payment", { // Corrected API route
+      const response = await fetch("/api/stripe/create-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -141,169 +141,6 @@ const VehicleSelection = ({ onWaitAndReturnConfirmed, isWaitAndReturnDisabled, d
   };
 
   return (
-    // <div className="bg-gray-300 shadow-lg mx-auto p-6 pt-1 rounded-lg max-w-xl">
-    //   <p className="font-semibold text-red-600 text-lg">Distance: {distance ? distance.toFixed(2) : "0.00"} km</p>
-
-    //   <h2 className="mb-3 font-semibold text-lg">Choose your vehicle</h2>
-
-    //   <VehicleFilter
-    //     onApply={(passengers, luggage) => {
-    //       const updatedVehicles = vehicles.filter(
-    //         (v) => v.passengers >= passengers && v.luggage >= luggage
-    //       );
-    //       setFilteredVehicles(updatedVehicles); // Update filtered vehicles
-    //     }}
-    //   />
-
-    //   <div className="justify-center content-center gap-6 grid grid-cols-3 mt-4">
-    //     {filteredVehicles.map((vehicle) => (
-    //       <VehicleCard
-    //         key={vehicle.id}
-    //         vehicle={vehicle}
-    //         selectedVehicle={selectedVehicle}
-    //         onSelect={setSelectedVehicle}
-    //         distance={distance}
-    //         setModalVehicle={setModalVehicle}
-    //       />
-    //     ))}
-    //   </div>
-
-    //     {modalVehicle && (
-    //         <Modal
-    //             open={!!modalVehicle}
-    //             onCancel={() => setModalVehicle(null)}
-    //             footer={[
-    //             <Button key="ok" type="primary" onClick={() => setModalVehicle(null)}>
-    //                 OK
-    //             </Button>,
-    //             ]}
-    //             title={modalVehicle.name}
-    //         >
-    //             <p>{modalVehicle.description}</p>
-    //         </Modal>
-    //      )}
-
-
-    //   <h2 className="mt-5 font-semibold text-lg">Extras</h2>
-    //   <div className="flex flex-col">
-    //     <label className="inline-flex items-center mt-2">
-    //       <input
-    //         type="checkbox"
-    //         checked={extras.meetAndGreet}
-    //         onChange={() => setExtras({ ...extras, meetAndGreet: !extras.meetAndGreet })}
-    //         className="mr-2"
-    //       />
-    //       Meet and Greet
-    //     </label>
-    //     <label className="inline-flex items-center mt-2">
-    //       <input
-    //         type="checkbox"
-    //         checked={extras.waitAndReturn}
-    //         onChange={handleWaitAndReturnChange}
-    //         className="mr-2"
-    //         disabled={isWaitAndReturnDisabled}
-    //       />
-    //       <span className={isWaitAndReturnDisabled ? "text-gray-400" : "text-black"}>
-    //         Wait and Return
-    //       </span>
-    //       <button
-    //         className="ml-2 text-gray-500 hover:text-gray-700"
-    //         onClick={(e) => {
-    //           e.stopPropagation();
-    //           setShowWaitAndReturnInfoModal(true);
-    //         }}
-    //       >
-    //         <Info size={20} />
-    //       </button>
-    //     </label>
-    //   </div>
-
-    //     <Modal
-    //     open={showWaitAndReturnInfoModal}
-    //     onCancel={() => setShowWaitAndReturnInfoModal(false)}
-    //     footer={[
-    //         <Button
-    //         key="ok"
-    //         type="primary"
-    //         onClick={() => setShowWaitAndReturnInfoModal(false)}
-    //         >
-    //         OK
-    //         </Button>,
-    //     ]}
-    //     title="Wait and Return"
-    //     centered
-    //     >
-    //     <p>
-    //         Choose this option for the best price if you want the driver to wait for you at your destination and take you back to the same place where you were picked up from
-    //         <strong> (waiting charges may apply)</strong>.
-    //     </p>
-    //     <p>
-    //         This option will automatically use your pick up address as your final destination.
-    //     </p>
-    //     </Modal>
-
-    //   {showWaitAndReturnModal && (
-    //     <WaitAndReturnModal
-    //       onConfirm={handleWaitAndReturnConfirm}
-    //       onClose={() => setShowWaitAndReturnModal(false)}
-    //     />
-    //   )}
-
-    //   <h2 className="mt-5 font-semibold text-lg">Choose your payment method:</h2>
-    //   <div className="flex flex-col space-y-2">
-    //     <label className="flex items-center">
-    //       <input type="radio" name="payment" value="cash" checked={paymentMethod === "cash"} onChange={(e) => setPaymentMethod(e.target.value)} className="mr-2" />
-    //       Pay by Cash
-    //     </label>
-
-    //     <label className="flex items-center">
-    //       <input type="radio" name="payment" value="googlepay" checked={paymentMethod === "googlepay"} onChange={(e) => setPaymentMethod(e.target.value)} className="mr-2" />
-    //       <span className="flex items-center">
-    //         <img src="g-pay.png" alt="Google Pay" className="mr-1 h-4" /> Google Pay
-    //       </span>
-    //     </label>
-
-    //     <label className="flex items-center">
-    //       <input
-    //         type="radio"
-    //         name="payment"
-    //         value="card"
-    //         checked={paymentMethod === "card"}
-    //         onChange={(e) => setPaymentMethod(e.target.value)}
-    //         className="mr-2"
-    //       />
-    //       Pay by Card
-    //     </label>
-
-    //     {paymentMethod === "card" && !isPaymentCompleted && selectedVehicle && (
-    //       <>
-    //         {!clientSecret ? (
-    //           <button
-    //             className="bg-blue-500 hover:bg-blue-600 mt-4 px-6 py-2 rounded text-white"
-    //             onClick={handlePayByCard}
-    //           >
-    //             Proceed to Pay
-    //           </button>
-    //         ) : (
-    //           <PaymentForm
-    //             amount={selectedVehicle.price}
-    //             clientSecret={clientSecret}
-    //             onPaymentSuccess={handlePaymentSuccess}
-    //           />
-    //         )}
-    //       </>
-    //     )}
-    //   </div>
-
-    //   {paymentMethod !== "card" || isPaymentCompleted ? (
-    //     <button
-    //       className="bg-blue-500 mt-5 py-2 rounded-lg w-full font-semibold text-white text-lg"
-    //       onClick={onBookNow}
-    //     >
-    //       Book Now
-    //     </button>
-    //   ) : null}
-    // </div>
     <div className="bg-[var(--color-secondary)] shadow-lg mx-auto p-6 pt-1 rounded-lg max-w-xl">
   <p className="font-semibold text-red-600 text-lg">
     Distance: {distance ? distance.toFixed(2) : "0.00"} km
