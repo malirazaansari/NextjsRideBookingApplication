@@ -8,7 +8,15 @@ import GoogleMapComponent from "../components/GoogleMapComponent";
 import BookingSummaryModal from "../components/BookingSummaryModal";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-// import 'antd/dist/reset.css';
+import Header from "../components/Header";
+import Navbar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import ReasonsSection from "@/components/reasons/ReasonSection";
+import DriverSection from "@/components/job/DriverSection";
+import TestimonialSection from "@/components/TestimonialSection";
+import MobileAppSection from "@/components/MobileAppSection";
+import BlogSection from "@/components/blog/BlogSection";
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
@@ -208,7 +216,8 @@ const handleBookingConfirmation = async () => {
   }
 
   return (
-    <Elements stripe={stripePromise}>
+      <Elements stripe={stripePromise}>
+
 
       <div className="relative flex h-screen" key={formKey}>
   <div
@@ -216,6 +225,10 @@ const handleBookingConfirmation = async () => {
       isVisible ? "w-1/2 lg:w-1/2" : "w-full"
     } md:w-full sm:w-full overflow-y-auto`}
   >
+    <Header />
+    <Navbar />
+    <Hero />
+    <ReasonsSection />
     <TripDetailsForm
       onPlaceSelected={handlePlaceSelected}
       addViaPlace={addViaPlace}
@@ -237,6 +250,12 @@ const handleBookingConfirmation = async () => {
       onPaymentMethodChange={setPaymentMethod}
       selectedDateTime={selectedDateTime}
     />
+    <DriverSection />
+    <TestimonialSection />
+    <MobileAppSection   />
+    <BlogSection />
+<Footer />
+
   </div>
 
   <button
@@ -266,7 +285,6 @@ const handleBookingConfirmation = async () => {
     />
   )}
 </div>
-
     </Elements>
   );
 };

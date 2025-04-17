@@ -1,59 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 @import "tailwindcss";
-/*
-:root {
-  --background: #121212;
-  --foreground: #e0e0e0;
-  --primary: #1e88e5;
-  --secondary: #424242;
-  --accent: #ff5722;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #cfcfcf;
-    --primary: #2196f3;
-    --secondary: #333333;
-    --accent: #ff7043;
-  }
-}
-
-body {
-  @apply font-sans text-gray-200;
-}
-
-button {
-  @apply bg-blue-600 hover:bg-orange-500 px-4 py-2 rounded-lg text-white transition;
-}
-
-input, select, textarea {
-  @apply bg-gray-800 px-3 py-2 border border-blue-600 rounded-lg text-gray-200 placeholder-gray-500;
-}
-
-a {
-  @apply text-blue-400 hover:text-orange-400 underline;
-}
-
-.card {
-  @apply bg-gray-800 shadow-lg p-4 rounded-lg text-gray-200;
-}
-
-.modal {
-  @apply bg-gray-900 shadow-xl p-6 rounded-lg text-gray-200;
-} */
-
-/* @tailwind base;
-@tailwind components; */
 @tailwind utilities;
 
 /* Light Theme Variables */
@@ -63,8 +10,10 @@ a {
   --color-primary: #1e88e5;
   --color-secondary: #f3f4f6;
   --color-accent: #ff5722;
+  --color-navbar: var(--color-primary);
 
   --font-sans: system-ui, sans-serif;
+  --font-heading: 'Fredoka One', cursive;
   --font-mono: ui-monospace, SFMono-Regular, monospace;
 }
 
