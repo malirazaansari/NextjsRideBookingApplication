@@ -17,6 +17,7 @@ import DriverSection from "@/components/job/DriverSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import MobileAppSection from "@/components/MobileAppSection";
 import BlogSection from "@/components/blog/BlogSection";
+import MoreServiceSection from "@/components/MoreServiceSection";
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
@@ -220,72 +221,73 @@ const handleBookingConfirmation = async () => {
 
 
       <div className="relative flex h-screen" key={formKey}>
-  <div
-    className={`bg-[var(--color-background)] text-[var(--color-foreground)] p-4 transition-all duration-300 ${
-      isVisible ? "w-1/2 lg:w-1/2" : "w-full"
-    } md:w-full sm:w-full overflow-y-auto`}
-  >
-    <Header />
-    <Navbar />
-    <Hero />
-    <ReasonsSection />
-    <TripDetailsForm
-      onPlaceSelected={handlePlaceSelected}
-      addViaPlace={addViaPlace}
-      isWaitAndReturn={isWaitAndReturn}
-      pickupPlace={pickupPlace}
-      dropoffPlace={dropoffPlace}
-      viaPlaces={viaPlaces}
-      onTripDetailsChange={setTripDetails}
-      onDateTimeChange={setSelectedDateTime}
-      isLoaded={isLoaded}
-    />
-    <VehicleSelection
-      onWaitAndReturnConfirmed={handleWaitAndReturnConfirmed}
-      isWaitAndReturnDisabled={isWaitAndReturnDisabled}
-      distance={distance}
-      onBookNow={handleBooking}
-      onVehicleSelect={setSelectedVehicle}
-      onExtrasChange={setExtras}
-      onPaymentMethodChange={setPaymentMethod}
-      selectedDateTime={selectedDateTime}
-    />
-    <DriverSection />
-    <TestimonialSection />
-    <MobileAppSection   />
-    <BlogSection />
-<Footer />
+        <div
+            className={`bg-[var(--color-background)] text-[var(--color-foreground)] p-4 transition-all duration-300 ${
+            isVisible ? "w-1/2 lg:w-1/2" : "w-full"
+            } md:w-full sm:w-full overflow-y-auto`}
+        >
+            <Header />
+            <Navbar />
+            <Hero />
+            <ReasonsSection />
+            <TripDetailsForm
+            onPlaceSelected={handlePlaceSelected}
+            addViaPlace={addViaPlace}
+            isWaitAndReturn={isWaitAndReturn}
+            pickupPlace={pickupPlace}
+            dropoffPlace={dropoffPlace}
+            viaPlaces={viaPlaces}
+            onTripDetailsChange={setTripDetails}
+            onDateTimeChange={setSelectedDateTime}
+            isLoaded={isLoaded}
+            />
+            <VehicleSelection
+            onWaitAndReturnConfirmed={handleWaitAndReturnConfirmed}
+            isWaitAndReturnDisabled={isWaitAndReturnDisabled}
+            distance={distance}
+            onBookNow={handleBooking}
+            onVehicleSelect={setSelectedVehicle}
+            onExtrasChange={setExtras}
+            onPaymentMethodChange={setPaymentMethod}
+            selectedDateTime={selectedDateTime}
+            />
+            <MoreServiceSection />
+            <DriverSection />
+            <TestimonialSection />
+            <MobileAppSection   />
+            <BlogSection />
+            <Footer />
 
-  </div>
+        </div>
 
-  <button
-    onClick={() => setIsVisible(!isVisible)}
-    className="hidden lg:block top-2 right-15 z-50 fixed bg-[var(--color-primary)] hover:bg-[var(--color-accent)] shadow-md px-3 py-2 rounded-md text-white"
-  >
-    {isVisible ? "Hide Map" : "Show Map"}
-  </button>
+        <button
+            onClick={() => setIsVisible(!isVisible)}
+            className="hidden lg:block top-2 right-15 z-50 fixed bg-[var(--color-primary)] hover:bg-[var(--color-accent)] shadow-md px-3 py-2 rounded-md text-white"
+        >
+            {isVisible ? "Hide Map" : "Show Map"}
+        </button>
 
-  <div className="hidden lg:block">
-    <GoogleMapComponent
-      isVisible={isVisible}
-      pickupPlace={pickupPlace}
-      dropoffPlace={dropoffPlace}
-      viaPlaces={viaPlaces.filter(
-        (place) => place && place.geometry && place.geometry.location
-      )}
-      isWaitAndReturn={isWaitAndReturn}
-      isLoaded={isLoaded}
-    />
-  </div>
+        <div className="hidden lg:block">
+            <GoogleMapComponent
+            isVisible={isVisible}
+            pickupPlace={pickupPlace}
+            dropoffPlace={dropoffPlace}
+            viaPlaces={viaPlaces.filter(
+                (place) => place && place.geometry && place.geometry.location
+            )}
+            isWaitAndReturn={isWaitAndReturn}
+            isLoaded={isLoaded}
+            />
+        </div>
 
-  {showBookingSummaryModal && (
-    <BookingSummaryModal
-      bookingSummary={bookingSummary}
-      onClose={handleBookingConfirmation}
-    />
-  )}
-</div>
-    </Elements>
+        {showBookingSummaryModal && (
+            <BookingSummaryModal
+            bookingSummary={bookingSummary}
+            onClose={handleBookingConfirmation}
+            />
+        )}
+      </div>
+      </Elements>
   );
 };
 
