@@ -24,6 +24,11 @@ body {
   color: var(--color-foreground);
 }
 
+.input-field {
+    @apply px-4 py-2 border border-gray-300 rounded outline-none w-full text-sm;
+  }
+
+
 button {
   background-color: var(--color-primary);
   color: white;
