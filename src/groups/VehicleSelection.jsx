@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Car, Bus, BusFront, Truck, Accessibility, CarTaxiFront , Info } from "lucide-react";
 import VehicleFilter from "../components/VehicleFilter";
